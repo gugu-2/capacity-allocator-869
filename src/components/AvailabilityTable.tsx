@@ -235,7 +235,7 @@ const AvailabilityTable = ({ startDate, endDate, searchText, minFte, maxFte, onD
     return (
       <Badge 
         variant={fte > 0.3 ? "default" : "destructive"}
-        className={`font-medium ${fte > 0.3 ? "bg-[#0000FF]" : ""}`}
+        className={`font-medium ${fte > 0.3 ? "bg-chart-primary" : ""}`}
       >
         {fte.toFixed(1)}
       </Badge>
@@ -244,35 +244,35 @@ const AvailabilityTable = ({ startDate, endDate, searchText, minFte, maxFte, onD
   
   // Memoize the table headers to prevent re-renders
   const tableHeaders = useMemo(() => (
-    <TableHeader className="bg-[#1A1A1A]">
-      <TableRow className="border-b border-[#333333]">
-        <TableHead className="w-[200px] text-[#FAFDFF] sticky left-0 bg-[#1A1A1A] z-10">
-          <Button variant="ghost" onClick={() => handleSort('name')} className="hover:text-[#0000FF] text-[#FAFDFF]">
+    <TableHeader className="bg-muted">
+      <TableRow className="border-b border-border">
+        <TableHead className="w-[200px] text-foreground sticky left-0 bg-muted z-10">
+          <Button variant="ghost" onClick={() => handleSort('name')} className="hover:text-chart-primary text-foreground">
             Name
             <ArrowUpDown className="ml-2 h-4 w-4" />
           </Button>
         </TableHead>
-        <TableHead className="w-[150px] text-[#FAFDFF]">
-          <Button variant="ghost" onClick={() => handleSort('role')} className="hover:text-[#0000FF] text-[#FAFDFF]">
+        <TableHead className="w-[150px] text-foreground">
+          <Button variant="ghost" onClick={() => handleSort('role')} className="hover:text-chart-primary text-foreground">
             Role
             <ArrowUpDown className="ml-2 h-4 w-4" />
           </Button>
         </TableHead>
-        <TableHead className="w-[100px] text-[#FAFDFF]">
-          <Button variant="ghost" onClick={() => handleSort('fte')} className="hover:text-[#0000FF] text-[#FAFDFF]">
+        <TableHead className="w-[100px] text-foreground">
+          <Button variant="ghost" onClick={() => handleSort('fte')} className="hover:text-chart-primary text-foreground">
             Total FTE
             <ArrowUpDown className="ml-2 h-4 w-4" />
           </Button>
         </TableHead>
-        <TableHead className="w-[200px] text-[#FAFDFF]">Current Projects</TableHead>
-        <TableHead className="w-[120px] text-[#FAFDFF]">
-          <Button variant="ghost" onClick={() => handleSort('availableFte')} className="hover:text-[#0000FF] text-[#FAFDFF]">
+        <TableHead className="w-[200px] text-foreground">Current Projects</TableHead>
+        <TableHead className="w-[120px] text-foreground">
+          <Button variant="ghost" onClick={() => handleSort('availableFte')} className="hover:text-chart-primary text-foreground">
             Avg. Available
             <ArrowUpDown className="ml-2 h-4 w-4" />
           </Button>
         </TableHead>
         {weekHeaders.map((header) => (
-          <TableHead key={header.week} className="text-[#FAFDFF] text-center whitespace-nowrap w-[90px]">
+          <TableHead key={header.week} className="text-foreground text-center whitespace-nowrap w-[90px]">
             {header.label}
           </TableHead>
         ))}
@@ -285,27 +285,27 @@ const AvailabilityTable = ({ startDate, endDate, searchText, minFte, maxFte, onD
     <TableBody>
       {data.length === 0 ? (
         <TableRow>
-          <TableCell colSpan={5 + weekHeaders.length} className="h-24 text-center text-[#FAFDFF]">
+          <TableCell colSpan={5 + weekHeaders.length} className="h-24 text-center text-foreground">
             No results found.
           </TableCell>
         </TableRow>
       ) : (
         data.map((person) => (
-          <TableRow key={person.id} className="hover:bg-[#1A1A1A] border-b border-[#333333]">
-            <TableCell className="font-medium text-[#FAFDFF] sticky left-0 bg-[#050203] hover:bg-[#1A1A1A] z-10">
+          <TableRow key={person.id} className="hover:bg-muted border-b border-border">
+            <TableCell className="font-medium text-foreground sticky left-0 bg-background hover:bg-muted z-10">
               {person.name}
             </TableCell>
-            <TableCell className="text-[#FAFDFF]">{person.role}</TableCell>
-            <TableCell className="text-[#FAFDFF]">{person.fte.toFixed(1)}</TableCell>
+            <TableCell className="text-foreground">{person.role}</TableCell>
+            <TableCell className="text-foreground">{person.fte.toFixed(1)}</TableCell>
             <TableCell>
               <div className="flex flex-wrap gap-1">
                 {person.allocations.length === 0 ? (
                   <span className="text-gray-500 text-sm">None</span>
                 ) : (
                   person.allocations.map((allocation: any, index: number) => (
-                    <Badge key={index} variant="outline" className="flex items-center gap-1 border-[#333333] bg-[#121212] text-[#FAFDFF]">
+                    <Badge key={index} variant="outline" className="flex items-center gap-1 border-border bg-card text-foreground">
                       <span>{allocation.projectName}</span>
-                      <span className="bg-[#222222] px-1 rounded text-xs text-[#FAFDFF]">
+                      <span className="bg-muted px-1 rounded text-xs text-foreground">
                         {allocation.allocation.toFixed(1)}
                       </span>
                     </Badge>
@@ -331,7 +331,7 @@ const AvailabilityTable = ({ startDate, endDate, searchText, minFte, maxFte, onD
   ), [data, weekHeaders]);
   
   return (
-    <div className="rounded-md border border-[#333333] overflow-x-auto">
+    <div className="rounded-md border border-border overflow-x-auto">
       <Table>
         {tableHeaders}
         {tableBody}
