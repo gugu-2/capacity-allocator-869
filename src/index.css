@@ -34,6 +34,10 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
+    
+    --chart-primary: 120 60% 70%;
+    --chart-secondary: 120 50% 60%;
+    --chart-tertiary: 120 40% 50%;
 
     --sidebar-background: 0 0% 98%;
 
@@ -88,6 +92,10 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+    
+    --chart-primary: 120 60% 70%;
+    --chart-secondary: 120 50% 60%;
+    --chart-tertiary: 120 40% 50%;
   }
 }
 

@@ -65,15 +65,15 @@ const generateCapacityData = (start: Date, numWeeks: number, plannedRolesData?: 
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-[#121212] rounded-md border border-[#333333] p-3 shadow-lg">
-        <p className="text-[#FAFDFF] font-medium mb-2">{`Week: ${label}`}</p>
+      <div className="bg-card rounded-md border p-3 shadow-lg">
+        <p className="text-foreground font-medium mb-2">{`Week: ${label}`}</p>
         {payload.map((entry: any, index: number) => (
           <div key={`item-${index}`} className="flex items-center gap-2 mb-1">
             <div 
               className="w-3 h-3 rounded-full"
               style={{ backgroundColor: entry.color }}
             />
-            <p className="text-[#FAFDFF]">
+            <p className="text-foreground">
               <span className="font-medium">{entry.name}:</span> {entry.value.toFixed(1)}
             </p>
           </div>
@@ -128,32 +128,32 @@ const CapacityChart = ({
         data={data}
         margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
       >
-        <CartesianGrid strokeDasharray="3 3" stroke="#222222" />
+        <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--chart-tertiary))" />
         <XAxis 
           dataKey="name" 
-          tick={{ fontSize: 12, fill: "#FAFDFF" }}
+          tick={{ fontSize: 12, fill: "hsl(var(--foreground))" }}
           tickLine={false}
-          stroke="#333333"
+          stroke="hsl(var(--chart-tertiary))"
         />
         <YAxis 
           tickLine={false}
-          tick={{ fontSize: 12, fill: "#FAFDFF" }}
-          stroke="#333333"
-          label={{ value: 'FTE', angle: -90, position: 'insideLeft', style: { textAnchor: 'middle', fontSize: 12, fill: "#FAFDFF" } }}
+          tick={{ fontSize: 12, fill: "hsl(var(--foreground))" }}
+          stroke="hsl(var(--chart-tertiary))"
+          label={{ value: 'FTE', angle: -90, position: 'insideLeft', style: { textAnchor: 'middle', fontSize: 12, fill: "hsl(var(--foreground))" } }}
         />
         <Tooltip content={<CustomTooltip />} />
         <Legend 
           verticalAlign="top" 
           height={36}
-          wrapperStyle={{ fontSize: '12px', color: "#FAFDFF" }}
+          wrapperStyle={{ fontSize: '12px', color: "hsl(var(--foreground))" }}
         />
         {showSeries.includes("totalCapacity") && (
           <Area 
             type="monotone" 
             dataKey="totalCapacity" 
             stackId="1" 
-            stroke="hsl(var(--foreground))" 
-            fill="hsl(var(--foreground))"
+            stroke="hsl(var(--chart-primary))" 
+            fill="hsl(var(--chart-primary))"
             fillOpacity={0.3}
             name="Total Capacity"
           />
@@ -163,9 +163,9 @@ const CapacityChart = ({
             type="monotone" 
             dataKey="plannedCapacity" 
             stackId="2" 
-            stroke="hsl(var(--foreground))" 
-            fill="hsl(var(--foreground))" 
-            fillOpacity={0.2}
+            stroke="hsl(var(--chart-secondary))" 
+            fill="hsl(var(--chart-secondary))" 
+            fillOpacity={0.3}
             name="Planned Capacity"
           />
         )}
@@ -174,9 +174,9 @@ const CapacityChart = ({
             type="monotone" 
             dataKey="netAvailable" 
             stackId="3" 
-            stroke="hsl(var(--foreground))" 
-            fill="hsl(var(--foreground))" 
-            fillOpacity={0.1}
+            stroke="hsl(var(--chart-tertiary))" 
+            fill="hsl(var(--chart-tertiary))" 
+            fillOpacity={0.3}
             name="Net Available"
           />
         )}
