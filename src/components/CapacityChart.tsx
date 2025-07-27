@@ -152,8 +152,8 @@ const CapacityChart = ({
             type="monotone" 
             dataKey="totalCapacity" 
             stackId="1" 
-            stroke="#0000FF" 
-            fill="#0000FF"
+            stroke="hsl(var(--foreground))" 
+            fill="hsl(var(--foreground))"
             fillOpacity={0.3}
             name="Total Capacity"
           />
@@ -163,9 +163,9 @@ const CapacityChart = ({
             type="monotone" 
             dataKey="plannedCapacity" 
             stackId="2" 
-            stroke="#6682FF" 
-            fill="#6682FF" 
-            fillOpacity={0.3}
+            stroke="hsl(var(--foreground))" 
+            fill="hsl(var(--foreground))" 
+            fillOpacity={0.2}
             name="Planned Capacity"
           />
         )}
@@ -174,9 +174,9 @@ const CapacityChart = ({
             type="monotone" 
             dataKey="netAvailable" 
             stackId="3" 
-            stroke="#3D5BFF" 
-            fill="#3D5BFF" 
-            fillOpacity={0.3}
+            stroke="hsl(var(--foreground))" 
+            fill="hsl(var(--foreground))" 
+            fillOpacity={0.1}
             name="Net Available"
           />
         )}
