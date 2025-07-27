@@ -11,11 +11,11 @@ interface RoleCapacityChartProps {
 
 // Mock data for roles with more distinguishable colors
 const roles = [
-  { id: 1, name: "Frontend Developer", color: "#8B5CF6" }, // Vivid Purple
-  { id: 2, name: "Backend Developer", color: "#0EA5E9" },  // Ocean Blue
-  { id: 3, name: "Designer", color: "#F97316" },           // Bright Orange
-  { id: 4, name: "Product Manager", color: "#D946EF" },    // Magenta Pink
-  { id: 5, name: "QA Engineer", color: "#10B981" }         // Emerald Green
+  { id: 1, name: "Frontend Developer", color: "hsl(var(--chart-primary))" },
+  { id: 2, name: "Backend Developer", color: "hsl(var(--chart-secondary))" },
+  { id: 3, name: "Designer", color: "hsl(var(--chart-tertiary))" },
+  { id: 4, name: "Product Manager", color: "hsl(var(--chart-primary))" },
+  { id: 5, name: "QA Engineer", color: "hsl(var(--chart-secondary))" }
 ];
 
 // Mock data generator for role-based capacity
@@ -72,12 +72,12 @@ const CustomTooltip = ({ active, payload, label }: any) => {
     });
     
     return (
-      <div className="bg-[#121212] rounded-md border border-[#333333] p-3 shadow-lg">
-        <p className="text-[#FAFDFF] font-medium mb-2">{`Week: ${label}`}</p>
+      <div className="bg-card rounded-md border p-3 shadow-lg">
+        <p className="text-foreground font-medium mb-2">{`Week: ${label}`}</p>
         
         {Object.entries(roleGroups).map(([roleName, entries], roleIndex) => (
           <React.Fragment key={`role-${roleIndex}`}>
-            <p className="text-[#FAFDFF] font-medium">{roleName}</p>
+            <p className="text-foreground font-medium">{roleName}</p>
             
             {entries.map((entry, entryIndex) => {
               const metricName = entry.dataKey.split('_')[1];
@@ -87,7 +87,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
                     className="w-3 h-3 rounded-full"
                     style={{ backgroundColor: entry.color }}
                   />
-                  <p className="text-[#FAFDFF] text-sm">
+                  <p className="text-foreground text-sm">
                     <span>{metricName === 'capacity' ? 'Capacity' : 
                            metricName === 'planned' ? 'Planned' : 
                            'Available'}:</span> {entry.value.toFixed(1)}
@@ -148,8 +148,8 @@ const RoleCapacityChart = ({ startDate, endDate, weeks, onDataChange }: RoleCapa
           key={role.id}
           className={`px-3 py-1 text-xs rounded-full transition-colors ${
             activeRoles.includes(role.name)
-              ? `bg-[${role.color}] text-[#FAFDFF]`
-              : 'bg-[#222222] text-gray-400 hover:bg-[#333333]'
+              ? `bg-chart-primary text-foreground`
+              : 'bg-muted text-muted-foreground hover:bg-muted/80'
           }`}
           onClick={() => toggleRole(role.name)}
         >
@@ -166,24 +166,24 @@ const RoleCapacityChart = ({ startDate, endDate, weeks, onDataChange }: RoleCapa
         data={data}
         margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
       >
-        <CartesianGrid strokeDasharray="3 3" stroke="#222222" />
+        <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--chart-tertiary))" />
         <XAxis 
           dataKey="name" 
-          tick={{ fontSize: 12, fill: "#FAFDFF" }}
+          tick={{ fontSize: 12, fill: "hsl(var(--foreground))" }}
           tickLine={false}
-          stroke="#333333"
+          stroke="hsl(var(--chart-tertiary))"
         />
         <YAxis 
           tickLine={false}
-          tick={{ fontSize: 12, fill: "#FAFDFF" }}
-          stroke="#333333"
-          label={{ value: 'FTE', angle: -90, position: 'insideLeft', style: { textAnchor: 'middle', fontSize: 12, fill: "#FAFDFF" } }}
+          tick={{ fontSize: 12, fill: "hsl(var(--foreground))" }}
+          stroke="hsl(var(--chart-tertiary))"
+          label={{ value: 'FTE', angle: -90, position: 'insideLeft', style: { textAnchor: 'middle', fontSize: 12, fill: "hsl(var(--foreground))" } }}
         />
         <Tooltip content={<CustomTooltip />} />
         <Legend 
           verticalAlign="top" 
           height={36}
-          wrapperStyle={{ fontSize: '12px', color: "#FAFDFF" }}
+          wrapperStyle={{ fontSize: '12px', color: "hsl(var(--foreground))" }}
         />
         
         {roles.filter(role => activeRoles.includes(role.name)).map((role) => (
